@@ -5,7 +5,8 @@
       <router-link to="/about">About</router-link>|
       <a href="/signup">Signup</a>|
       <a href="/login">Login</a>|
-      <a href="/logout">Logout</a>
+      <a href="/logout">Logout</a>|
+      <a href="/UsersShow">User Info</a>
     </div>
     <router-view />
   </div>
