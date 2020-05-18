@@ -6,6 +6,7 @@
       <p>Over/Under: {{ forecast.maxTempF }} Farenheit</p>
       <p>Moneyline: -110</p>
       <p>City: Chicago</p>
+      <router-link to="/BetsNew">Bet</router-link>
     </div>
   </div>
 </template>
@@ -25,6 +26,10 @@ export default {
       this.forecasts = response.data;
     });
   },
-  methods: {},
+  methods: {
+    onPressLearnMore: function() {
+      alert("Hello");
+    },
+  },
 };
 </script>
