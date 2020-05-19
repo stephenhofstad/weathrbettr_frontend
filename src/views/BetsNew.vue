@@ -1,21 +1,30 @@
 <template>
-  <div class="container">
-    <form v-on:submit.prevent="createBet()">
-      <h1>New Bet</h1>
-      <ul>
-        <li class="text-danger" v-for="error in errors">{{ error }}</li>
-      </ul>
-      <label>Amount:</label>
-      <input type="text" v-model="newBetAmount" />
-      Pick:
-      <input type="text" v-model="newBetPick" />
-      Contest Id:
-      <input type="text" v-model="newContestId" />
-      <input type="submit" value="Create" />
+  <div class="bets-new">
+    <br></br>
+    <form v-on:submit.prevent="newBet()">
+      <label for="contest_id">contest_id:</label>
+    
+      <!-- <input type="text" v-model="contest_id" id="contest_id" name="contest_id" /> -->
+     <select v-model="contest_id">
+       <option value="4">5/26/20</option>
+       <option value="5">5/27/20</option>
+       <option value="6">5/28/20</option>
+     </select>
+      <label for="amount">Amount:</label>
+      
+      <input type="text" v-model="amount" id="amount" name="amount" />
+      <br />
+      <label for="pick">Pick:</label>
+      <input type="radio" v-model="pick" id="under" name="pick" value="under" />
+      <label for="under">Under</label>
+      <br />
+      <input type="radio" v-model="pick" id="over" name="pick" value="over" />
+      <label for="over">Over</label>
+      <br />
+      <input type="submit" class="btn btn-primary" value="Submit" />
     </form>
   </div>
 </template>
-
 
 <script>
 import axios from "axios";
@@ -23,19 +32,18 @@ import axios from "axios";
 export default {
   data: function() {
     return {
-      newBetAmount: "",
-      newBetPick: "",
-      newContestId: "",
+      contest_id: "",
+      amount: "",
+      pick: "",
       errors: [],
     };
   },
-  created: function() {},
   methods: {
-    createBet: function() {
+    newBet: function() {
       var params = {
-        amount: this.newBetAmount,
-        pick: this.newBetPick,
-        contest_id: this.newContestId,
+        contest_id: this.contest_id,
+        amount: this.amount,
+        pick: this.pick,
       };
       axios
         .post("/api/bets", params)
@@ -43,7 +51,6 @@ export default {
           this.$router.push("/users/profile");
         })
         .catch(error => {
-          console.log(error.response);
           this.errors = error.response.data.errors;
         });
     },

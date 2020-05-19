@@ -6,8 +6,16 @@
         <li class="text-danger" v-for="error in errors">{{ error }}</li>
       </ul>
       <div class="form-group">
+        <label>Name:</label>
+        <input type="name" class="form-control" v-model="name" />
+      </div>
+      <div class="form-group">
         <label>email:</label>
         <input type="email" class="form-control" v-model="email" />
+      </div>
+      <div class="form-group">
+        <label>Balance:</label>
+        <input type="balance" class="form-control" v-model="balance" />
       </div>
       <div class="form-group">
         <label>Password:</label>
@@ -31,6 +39,8 @@ export default {
       email: "",
       password: "",
       passwordConfirmation: "",
+      name: "",
+      balance: "",
       errors: [],
     };
   },
@@ -40,6 +50,8 @@ export default {
         email: this.email,
         password: this.password,
         password_confirmation: this.passwordConfirmation,
+        name: this.name,
+        balance: this.balance,
       };
       axios
         .post("/api/users", params)

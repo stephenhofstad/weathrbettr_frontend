@@ -1,52 +1,92 @@
 <template>
-  <form v-on:submit.prevent="newBet()">
-    <label for="contest_id">contest_id:</label>
-    <br />
-    <input type="text" id="contest_id" name="contest_id" />
-    <br />
-    <label for="amount">Amount:</label>
-    <br />
-    <input type="text" id="amount" name="amount" />
-    <br />
-    <label for="pick">Pick:</label>
-    <input type="radio" id="under" name="pick" value="under" />
-    <label for="under">Under</label>
-    <br />
-    <input type="radio" id="over" name="pick" value="over" />
-    <label for="over">Over</label>
-    <br />
-    <input type="submit" class="btn btn-primary" value="Submit" />
-  </form>
+  <div class="UsersShow">
+    <h3>Profile</h3>
+    <table id="userTable">
+      <thead>
+        <tr>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Email</th>
+          <th>Balance</th>
+        </tr>
+      </thead>
+      <tbody>
+          <td>{{user.first_name}}</td>
+          <td>{{user.last_name}}</td>
+          <td>{{user.email}}</td>
+          <td>${{user.balance}}.00</td>
+        </tr>
+      </tbody>
+    </table>
+    <h3>Bet History</h3>
+    <table id="firstTable">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Line</th>
+          <th>Amount</th>
+          <th>Pick</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="bet in user.bets">
+          <td>{{bet.contest.date}}</td>
+          <td>{{bet.contest.line}}</td>
+          <td>{{bet.amount}}</td>
+          <td>{{bet.pick}}</td>
+          <td>{{bet.status}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </template>
 
+<style>
+table {
+  font-family: "Open Sans", sans-serif;
+  width: 750px;
+  border-collapse: collapse;
+  border: 3px solid #44475c;
+  margin: 10px 10px 0 10px;
+}
+
+table th {
+  text-transform: uppercase;
+  text-align: left;
+  background: #44475c;
+  color: #fff;
+  padding: 8px;
+  min-width: 30px;
+}
+
+table td {
+  text-align: left;
+  padding: 8px;
+  border-right: 2px solid #7d82a8;
+}
+table td:last-child {
+  border-right: none;
+}
+table tbody tr:nth-child(2n) td {
+  background: #d4d8f9;
+}
+</style>
 <script>
-import axios from "axios";
+var axios = require("axios");
 
 export default {
   data: function() {
     return {
-      contest_id: "",
-      amount: "",
-      pick: "",
-      errors: [],
+      user: {},
     };
   },
-  methods: {
-    newBet: function() {
-      var params = {
-        contest_id: this.contest_id,
-        amount: this.amount,
-        pick: this.pick,
-      };
-      axios
-        .post("/api/bets", params)
-        .then(response => {
-          this.$router.push("/users/profile");
-        })
-        .catch(error => {
-          this.errors = error.response.data.errors;
-        });
-    },
+  created: function() {
+    axios.get("/api/users/profile").then(response => {
+      console.log(response);
+      this.user = response.data;
+    });
   },
+  methods: {},
 };
 </script>

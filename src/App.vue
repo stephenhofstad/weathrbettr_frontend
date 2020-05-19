@@ -7,7 +7,7 @@
     <router-link to="/Login">Login</router-link>|
     <router-link to="/Logout">Logout</router-link>|
     <router-link to="/About">24 Hour History</router-link>|
-    <router-link to="/BetsNew">Place a Bet</router-link>
+    <router-link to="/bets/new">Place a Bet</router-link>
     <head>
       <title>Phantom by HTML5 UP</title>
       <meta charset="utf-8" />

@@ -4,16 +4,13 @@
     <table id="userTable">
       <thead>
         <tr>
-          <th>First Name</th>
-          <th>Last Name</th>
+          <th>Name</th>
           <th>Email</th>
           <th>Balance</th>
         </tr>
       </thead>
       <tbody>
-        <tr v-for="email in user.bets">
-          <td>{{user.first_name}}</td>
-          <td>{{user.last_name}}</td>
+          <td>{{user.name}}</td>
           <td>{{user.email}}</td>
           <td>${{user.balance}}.00</td>
         </tr>
@@ -24,18 +21,22 @@
       <thead>
         <tr>
           <th>Date</th>
+          <th>Game</th>
           <th>Line</th>
           <th>Amount</th>
           <th>Pick</th>
+          <th>Temperature</th>
           <th>Status</th>
         </tr>
       </thead>
       <tbody>
         <tr v-for="bet in user.bets">
           <td>{{bet.contest.date}}</td>
+          <td>{{bet.contest.game}}</td>
           <td>{{bet.contest.line}}</td>
           <td>{{bet.amount}}</td>
           <td>{{bet.pick}}</td>
+          <td>{{bet.real_temp}}</td>
           <td>{{bet.status}}</td>
         </tr>
       </tbody>
