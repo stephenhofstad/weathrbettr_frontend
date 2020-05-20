@@ -2,13 +2,16 @@
   <div class="bets-new">
     <br></br>
     <form v-on:submit.prevent="newBet()">
-      <label for="contest_id">contest_id:</label>
+      <label for="contest_id">Contest Date:</label>
     
       <!-- <input type="text" v-model="contest_id" id="contest_id" name="contest_id" /> -->
      <select v-model="contest_id">
-       <option value="4">5/26/20</option>
-       <option value="5">5/27/20</option>
-       <option value="6">5/28/20</option>
+       <option value="5">5/23/20</option>
+       <option value="6">5/24/20</option>
+       <option value="7">5/25/20</option>
+       <option value="8">5/26/20</option>
+       <option value="9">5/27/20</option>
+       <option value="10">5/28/20</option>
      </select>
       <label for="amount">Amount:</label>
       

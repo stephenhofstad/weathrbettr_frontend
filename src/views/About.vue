@@ -2,10 +2,9 @@
   <div class="home">
     <h1>Temperature Past 24 Hours</h1>
     <div v-for="temper in tempers">
-      <h2>{{ temper }}</h2>
-      <!-- <p>Over/Under: {{ temper.maxTempF }} Farenheit</p>
-      <p>Moneyline: -110</p>
-      <p>City: Chicago</p>-->
+      <h4>Time:{{ temper[0][0] }}</h4>
+      <h4>Temperature Farenheit:{{ temper[0][1] }}</h4>
+      <br />
     </div>
   </div>
 </template>

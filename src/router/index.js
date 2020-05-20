@@ -7,6 +7,7 @@ import Logout from "../views/Logout.vue";
 import UsersShow from "../views/UsersShow.vue";
 import BetsNew from "../views/BetsNew.vue";
 import Tester from "../views/Tester.vue";
+import upupdowndownleftrightleftrightbastart from "../views/upupdowndownleftrightleftrightbastart.vue";
 Vue.use(VueRouter);
 
 const routes = [
@@ -29,6 +30,11 @@ const routes = [
   { path: "/users/profile", name: "users-show", component: UsersShow },
   { path: "/bets/new", name: "bets-new", component: BetsNew },
   { path: "/tester", name: "tester", component: Tester },
+  {
+    path: "/upupdowndownleftrightleftrightbastart",
+    name: "upupdowndownleftrightleftrightbastart",
+    component: upupdowndownleftrightleftrightbastart,
+  },
 ];
 
 const router = new VueRouter({

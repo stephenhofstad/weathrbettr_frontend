@@ -26,6 +26,7 @@
           <th>Amount</th>
           <th>Pick</th>
           <th>Temperature</th>
+          <th></th>
           <th>Status</th>
         </tr>
       </thead>
@@ -33,14 +34,17 @@
         <tr v-for="bet in user.bets">
           <td>{{bet.contest.date}}</td>
           <td>{{bet.contest.game}}</td>
-          <td>{{bet.contest.line}}</td>
-          <td>{{bet.amount}}</td>
+          <td>{{bet.contest.line}} °F</td>
+          <td>${{bet.amount}}.00</td>
           <td>{{bet.pick}}</td>
-          <td>{{bet.real_temp}}</td>
+          <td>{{bet.contest.real_temp}} °F</td>
+          <td> <button v-on:click="updateTemp(bet.contest)">Show Temp</button> </td>
           <td>{{bet.status}}</td>
+  
         </tr>
       </tbody>
     </table>
+    
   </div>
 </template>
 
@@ -73,6 +77,8 @@ table td:last-child {
 table tbody tr:nth-child(2n) td {
   background: #d4d8f9;
 }
+
+
 </style>
 <script>
 var axios = require("axios");
@@ -80,7 +86,10 @@ var axios = require("axios");
 export default {
   data: function() {
     return {
+      real_temp: "",
       user: {},
+      tempers: [],
+
     };
   },
   created: function() {
@@ -88,7 +97,27 @@ export default {
       console.log(response);
       this.user = response.data;
     });
+    axios.get("/api/tempers").then(response => {
+      this.tempers = response.data;
+    });
   },
-  methods: {},
+  
+  methods: {
+    updateTemp: function(contest) {
+      var params = {
+        real_temp: this.tempers[0][0][1],
+        
+      };
+      axios
+        .patch("/api/contests/" + contest.id, params)
+        .then(response => {
+          // this.$router.push("/users/profile");
+          console.log(response)
+        })
+        .catch(error => {
+          this.errors = error.response.data.errors;
+        });
+    },
+  },                                            
 };
 </script>
