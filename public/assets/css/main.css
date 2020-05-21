@@ -168,12 +168,14 @@ textarea {
 
 body {
   -ms-overflow-style: scrollbar;
+  background-image: url("./assets/weather.png");
 }
 
 @media screen and (max-width: 480px) {
   html,
   body {
     min-width: 320px;
+    background-image: url("./assets/weather.png");
   }
 }
 
@@ -189,6 +191,7 @@ html {
 
 body {
   background: #ffffff;
+  background-image: url("./assets/weather.png");
 }
 
 body.is-preload *,
